@@ -1,6 +1,6 @@
 class BillingsController < ApplicationController
   def index
-    @billings = Billing.all
+    @billings = Billing.all.order(billing_date: "DESC")
   end
 
   def create
