@@ -13,4 +13,8 @@ class BillingsController < ApplicationController
     )
   end
 
+  def destroy
+    Billing.find_by!(id: params[:id], user: User.first).destroy!
+  end
+
 end
