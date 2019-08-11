@@ -1,11 +1,12 @@
 class BillingsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
-    @billings = Billing.all.order(billing_date: "DESC")
+    @billings = current_user.billings.order(billing_date: "DESC")
   end
 
   def create
-    @billing = Billing.create!(
-      user: User.first,
+    @billing = current_user.billings.create!(
       game: Game.find(params[:game]),
       billing_date: params[:date],
       amount: params[:amount],
@@ -14,7 +15,7 @@ class BillingsController < ApplicationController
   end
 
   def destroy
-    Billing.find_by!(id: params[:id], user: User.first).destroy!
+    current_user.billings.find_by!(id: params[:id]).destroy!
   end
 
 end
