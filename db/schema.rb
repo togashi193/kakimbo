@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_06_133231) do
+ActiveRecord::Schema.define(version: 2019_08_11_074145) do
 
   create_table "billings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 2019_05_06_133231) do
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "uid", null: false
+    t.index ["uid"], name: "index_users_on_uid"
   end
 
   add_foreign_key "billings", "games"
